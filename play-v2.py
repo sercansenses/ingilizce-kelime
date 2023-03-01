@@ -18,7 +18,7 @@ print('1 - Telaffuz\n2 - Kelime\n3 - Hata düzeltme\n')
 mod = int(input())
 while True:
     if mod < 1 or mod > 3:
-        mod = int(input('\nLütfen geçerli bir uygulama numarası yazın.\n1 - Telaffuz\n2 - Kelime\n3 - Hata düzeltme'))
+        mod = int(input('\nLütfen geçerli bir uygulama numarası yazın.\n1 - Telaffuz\n2 - Kelime\n3 - Hata düzeltme\n'))
         continue
     else:
         break
