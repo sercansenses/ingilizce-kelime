@@ -1,3 +1,7 @@
+import pyttsx3
+engine = pyttsx3.init()
+engine.setProperty('rate', 200)
+
 import random
 import time
 import csv
@@ -32,6 +36,8 @@ if mod == 1:
     while True:
         random_key = random.choice(list(pronunc.keys()))
         print("İngilizce: ", random_key)
+        engine.say(random_key)
+        engine.runAndWait()
         user_input = input("Lütfen telaffuzunu yazın\n")
         if pronunc[random_key] == user_input:
             print("\nDoğru!")
@@ -46,6 +52,8 @@ if mod == 1:
                 if puan < 0:
                     puan = 0
             print(f'Doğrusu şu şekilde okunuyor:{pronunc[random_key]}')
+            engine.say(random_key)
+            engine.runAndWait()
             print(f'Puanınız: {puan}\n')
             time.sleep(5)
 
@@ -62,6 +70,8 @@ if mod == 2:
         values = sozluk[word]
         # İngilizce-Türkçe sorusu yap
         if random.choice([True, False]):
+            engine.say(word)
+            engine.runAndWait()
             answer = input("\nWhat is the Turkish equivalent of '{}'?\n".format(word))
             correct_answers = [value for value in values if answer.lower() == value.lower()]
             if correct_answers:
@@ -82,6 +92,8 @@ if mod == 2:
                 print("Wrong!")
                 score = max(score - level, 0)
             # doğru cevabı göster
+            engine.say(word)
+            engine.runAndWait()
             print("The correct answer: '{}'.".format(word))
         # Puanı yazdır
         print("Your score is {}.".format(score))
