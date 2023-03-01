@@ -14,7 +14,7 @@ with open('pronunc.csv', mode='r', encoding='utf-8') as pronunc_file:
     pronunc = {rows[0]: rows[1] for rows in pronunc_reader}
 
 print('Aşağıdaki listeden bir uygulama seçin ve sayısını yazın.\n')
-print('1 - Telaffuz\n2 - Kelime\n3 - Hata düzeltme')
+print('1 - Telaffuz\n2 - Kelime\n3 - Hata düzeltme\n')
 mod = int(input())
 while True:
     if mod < 1 or mod > 3:
