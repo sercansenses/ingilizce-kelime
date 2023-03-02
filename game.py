@@ -14,14 +14,14 @@ while True:
         print('Mod Seçin\n1: Kelime\n2: Telaffuz\n3: Sözlükte Hata Düzeltme\n4: Sözlüğe Kelime Ekle\n5: Programı sonlandır\n')
         mod = int(input())
         print('\n')
-    if mod == 1 or mod == 2:
-        while (level < 1 or level > 10):
-            print('Zorluk Seviyesini Seçin(1-10)\n')
-            level = int(input())
-            print('\n')
     if mod == 1:
         sec = input('1: Kelime Oyununu Başlat\n2: Geri\nSeçiminiz: ')
         while puan < 100:
+            if mod == 1 or mod == 2:
+                while (level < 1 or level > 10):
+                    print('Zorluk Seviyesini Seçin(1-10)\n')
+                    level = int(input())
+                    print('\n')
             q = int(input('1: Soru iste 2: Oyunu sonlandır Seçiminiz: '))
             if q == 2:
                 print(f'Oyun sonlandırıldı. Puanınız: {puan}\n\n')
@@ -99,28 +99,55 @@ while True:
 
     if mod == 3:
         while True:
-            sec = input('1: Kelime düzelt\n2: Geri\nSeçiminiz: ')
-            anahtar = input("Düzelteceğiniz kelimenin ingilizcesini yazın: ")
-            nesne = None
-            for item in data:
-                if 'eng' in item and item['eng'] == anahtar:
-                    nesne = item
-                    break
-            if nesne is not None:
-                print(nesne)
-            else:
-                print("Belirtilen kelime sözlükte yok.")
-                continue
-            while True:
-                secim = input("1: Mevcut kelimenin değerlerini güncelle\n2: Yeni anlam ve değer ekle\n3: Başka bir kelimeyi düzenle\nSeçiminiz: ")
-                print('\n\n')
-                if secim == "1":
-                    print("Mevcut anahtarlar:", list(nesne.keys()))
-                    anahtar = input("Hangi kelimenin değerlerini güncellemek istersiniz? ")
-                    if anahtar in nesne:
+            sec = int(input('1: Kelime düzelt\n2: Geri\nSeçiminiz: '))
+            print('\n\n')
+            if sec == 1:
+                anahtar = input("Düzelteceğiniz kelimenin ingilizcesini yazın: ")
+                nesne = None
+                for item in data:
+                    if 'eng' in item and item['eng'] == anahtar:
+                        nesne = item
+                        break
+                if nesne is not None:
+                    print(nesne)
+                else:
+                    print("Belirtilen kelime sözlükte yok.")
+                    continue
+                while True:
+                    secim = input("1: Mevcut kelimenin değerlerini güncelle\n2: Yeni anlam ve değer ekle\n3: Başka bir kelimeyi düzenle\nSeçiminiz: ")
+                    print('\n\n')
+                    if secim == "1":
+                        print("Mevcut anahtarlar:", list(nesne.keys()))
+                        anahtar = input("Hangi anahtarın değerini güncellemek istersiniz? Anahtar: ")
+                        if anahtar in nesne:
+                            yeni_deger = input("Yeni değer: ")
+                            nesne[anahtar] = yeni_deger
+                            print(f"{anahtar} anahtarının değeri başarıyla güncellendi.")
+                            print("Güncel:", nesne, "\n\n")
+                            kayıt = input('Değişiklikleri kaydetmek istiyor musunuz?(y/n): ')
+                            if kayıt == 'y':
+                                for item in data:
+                                    if item['eng'] == anahtar:
+                                        data.remove(item)
+                                with open('dict.json', 'w') as f:
+                                    json.dump(data, f)
+                                new_item = nesne
+                                data.append(new_item)
+                                with open('dict.json', 'w') as f:
+                                    json.dump(data, f)
+                                print('Değişiklikler kaydedildi!\n\n')
+                            elif kayıt == 'n':
+                                print('Değişiklikler kaydedilmedi!')
+                            else:
+                                print('Seçenek kabul edilmedi.')
+                        else:
+                            print(f"{anahtar} anahtarı bulunamadı.")
+
+                    elif secim == "2":
+                        anahtar = input("Yeni anahtar: ")
                         yeni_deger = input("Yeni değer: ")
                         nesne[anahtar] = yeni_deger
-                        print(f"{anahtar} anahtarının değeri başarıyla güncellendi.")
+                        print(f"{anahtar} başarıyla eklendi.")
                         print("Güncel:", nesne, "\n\n")
                         kayıt = input('Değişiklikleri kaydetmek istiyor musunuz?(y/n): ')
                         if kayıt.lower == 'y':
@@ -134,36 +161,22 @@ while True:
                             with open('dict.json', 'w') as f:
                                 json.dump(data, f)
                             print('Değişiklikler kaydedildi!\n\n')
+                    elif secim == "3":
+                        break
                     else:
-                        print(f"{anahtar} anahtarı bulunamadı.")
+                        print("Geçersiz seçim!")
+            elif sec == 2:
+                break
+            else:
+                print('Geçersiz seçim!')
+                continue
 
-                elif secim == "2":
-                    anahtar = input("Yeni anahtar: ")
-                    yeni_deger = input("Yeni değer: ")
-                    nesne[anahtar] = yeni_deger
-                    print(f"{anahtar} başarıyla eklendi.")
-                    print("Güncel:", nesne, "\n\n")
-                    kayıt = input('Değişiklikleri kaydetmek istiyor musunuz?(y/n): ')
-                    if kayıt.lower == 'y':
-                        for item in data:
-                            if item['eng'] == anahtar:
-                                data.remove(item)
-                        with open('dict.json', 'w') as f:
-                            json.dump(data, f)
-                        new_item = nesne
-                        data.append(new_item)
-                        with open('dict.json', 'w') as f:
-                            json.dump(data, f)
-                        print('Değişiklikler kaydedildi!\n\n')
-                elif secim == "3":
-                    break
-                else:
-                    print("Geçersiz seçim.")
 
     if mod == 4:
         while True:
-            sec = input('1: Yeni kelime ekle\n2: Geri\nSeçiminiz: ')
-            if sec == '1':
+            sec = int(input('1: Yeni kelime ekle\n2: Geri\nSeçiminiz: '))
+            print('\n\n')
+            if sec == 1:
                 yenikelime = {}
                 eng = input('İngilizce kelimeyi girin: ')
                 yenikelime['eng'] = eng
