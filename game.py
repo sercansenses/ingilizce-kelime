@@ -109,10 +109,10 @@ while True:
             if nesne is not None:
                 print(nesne)
             else:
-                print("Belirtilen anahtar verilerde yok.")
+                print("Belirtilen kelime sözlükte yok.")
                 continue
             while True:
-                secim = input("1: Mevcut anahtarın değerini güncelle\n2: Yeni anahtar ve değer ekle\n3: Başka bir kelimeyi düzenle\nSeçiminiz: ")
+                secim = input("1: Mevcut kelimenin değerlerini güncelle\n2: Yeni anlam ve değer ekle\n3: Başka bir kelimeyi düzenle\nSeçiminiz: ")
                 print('\n\n')
                 if secim == "1":
                     print("Mevcut anahtarlar:", list(nesne.keys()))
