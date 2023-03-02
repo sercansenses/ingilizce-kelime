@@ -1,6 +1,6 @@
 İngilizce öğrenmek isteyen Türk'ler için geliştirilmiş kelime, telaffuz öğrenme yazılımı.
 
-Programımız ingilizce öğrenmenin %75'ini oluşturan kelime bilgisini geliştirme amacıyla oluşturulmuştur.
+Programımız ingilizce öğrenmenin %75'ini oluşturan kelime bilgisini geliştirme amacıyla oluşturulmuştur ve en çok kullanılan 3600 kelime derlenmiştir.
 
 Kullanabilmek için bilgisayarınızda python yüklü olmalıdır. İlerleyen zamanlarda her cihazda çalışabilen versiyonları yayınlanacaktır.
 
